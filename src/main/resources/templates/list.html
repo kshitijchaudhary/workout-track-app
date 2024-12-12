@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workouts List</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Workouts List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Workout Name</th>
+        <th>Duration</th>
+        <th>Intensity</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="workout : ${workouts}">
+        <td th:text="${workout.name}"></td>
+        <td th:text="${workout.duration}"></td>
+        <td th:text="${workout.intensity}"></td>
+        <td th:text="${workout.date}"></td> <!-- Display the date -->
+    </tr>
+    </tbody>
+</table>
+
+<a href="/">Back to Home</a>
+</body>
+</html>

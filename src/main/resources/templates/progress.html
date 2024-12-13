@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracking</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Progress Tracking</h1>
+    <div class="stats">
+        <p><strong>Total Workouts:</strong> <span th:text="${progressStats.totalWorkouts}"></span></p>
+        <p><strong>Total Duration:</strong> <span th:text="${progressStats.totalDuration}"></span> minutes</p>
+        <p><strong>Most Frequent Workout Type:</strong> <span th:text="${progressStats.mostFrequentType}"></span></p>
+    </div>
+    <a href="/" class="back-link">Back to Home</a>
+</div>
+</body>
+</html>

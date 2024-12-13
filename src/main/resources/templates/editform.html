@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Workout</title>
+    <title>Edit Workout</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <div class="container">
-    <h2>Add a New Workout</h2>
-    <form action="/save-workout" method="post" th:object="${workout}">
+    <h2>Edit Workout</h2>
+    <form action="/update-workout" method="POST" th:object="${workout}">
+        <!-- Hidden field for ID -->
+        <input type="hidden" th:field="*{id}">
+
         <div class="form-group">
             <label for="workoutName">Workout Name</label>
             <input type="text" id="workoutName" th:field="*{name}" required>
@@ -18,42 +21,36 @@
 
         <div class="form-group">
             <label for="duration">Duration (minutes)</label>
-            <input type="number" id="duration" th:field="*{duration}" min="1" required>
+            <input type="number" id="duration" th:field="*{duration}" required>
             <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}">Duration Error</span>
         </div>
 
         <div class="form-group">
             <label for="intensity">Intensity</label>
             <select id="intensity" th:field="*{intensity}" required>
-                <option value="low" th:selected="*{intensity == 'low'}">Low</option>
-                <option value="medium" th:selected="*{intensity == 'medium'}">Medium</option>
-                <option value="high" th:selected="*{intensity == 'high'}">High</option>
+                <option value="Low" th:selected="*{intensity == 'Low'}">Low</option>
+                <option value="Medium" th:selected="*{intensity == 'Medium'}">Medium</option>
+                <option value="High" th:selected="*{intensity == 'High'}">High</option>
             </select>
             <span th:if="${#fields.hasErrors('intensity')}" th:errors="*{intensity}">Intensity Error</span>
         </div>
 
         <div class="form-group">
             <label for="date">Date</label>
-            <input type="date" id="date" th:field="*{date}" required th:max="${T(java.time.LocalDate).now()}">
+            <input type="date" id="date" th:field="*{date}" required>
             <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date Error</span>
         </div>
 
         <div class="form-group">
             <label for="category">Category</label>
-            <select id="category" th:field="*{category}" required>
-                <option value="Cardio" th:selected="*{category == 'Cardio'}">Cardio</option>
-                <option value="Strength" th:selected="*{category == 'Strength'}">Strength</option>
-                <option value="Flexibility" th:selected="*{category == 'Flexibility'}">Flexibility</option>
-                <option value="Endurance" th:selected="*{category == 'Endurance'}">Endurance</option>
-            </select>
+            <input type="text" id="category" th:field="*{category}" required>
             <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</span>
         </div>
 
-        <button type="submit">Save Workout</button>
+        <button type="submit">Update Workout</button>
     </form>
-
     <br>
-    <a href="/" class="back-link">Back to Home</a>
+    <a href="/workouts" class="back-link">Back to Workout List</a>
 </div>
 </body>
 </html>

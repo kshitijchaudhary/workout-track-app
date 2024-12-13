@@ -7,16 +7,33 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Welcome to Workout Tracking Application</h1>
+<h1>Welcome to the Workout Tracker</h1>
+<p>Track your workouts, monitor progress, and manage your fitness journey!</p>
 
-<div class="button-container">
-    <a href="/form">
-        <button>Add New Workout</button>
-    </a>
-    <a href="/workouts">
-        <button>View Workouts List</button>
-    </a>
+<!-- Navigation Section -->
+<nav>
+    <ul>
+        <li><a href="/form">Add a New Workout</a></li>
+        <li><a href="/workouts">View All Workouts</a></li>
+        <li><a href="/progress">Progress Tracking</a></li>
+        <li><a href="/export">Export Workouts</a></li>
+    </ul>
+</nav>
+
+<!-- Body Section -->
+<div class="container">
+    <h2>Import Workouts</h2>
+    <form action="/import" method="post" enctype="multipart/form-data">
+        <div class="file-upload">
+            <label for="importFile">Choose File</label>
+            <input type="file" id="importFile" name="file" accept=".csv" required>
+            <button type="submit">Upload</button>
+        </div>
+    </form>
 </div>
 
+<footer>
+    <p>Total Page Hits: <span th:text="${pageHits}"></span></p>
+</footer>
 </body>
 </html>

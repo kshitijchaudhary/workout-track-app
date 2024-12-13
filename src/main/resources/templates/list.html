@@ -1,33 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workouts List</title>
+    <title>Workout List</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Workouts List</h1>
+<h1>All Workouts</h1>
 
-<table>
+<!-- Table for displaying workouts -->
+<table class="table-workouts">
     <thead>
     <tr>
         <th>Workout Name</th>
-        <th>Duration</th>
+        <th>Duration (minutes)</th>
         <th>Intensity</th>
         <th>Date</th>
+        <th>Category</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
+    <!-- Iterate through workouts -->
     <tr th:each="workout : ${workouts}">
         <td th:text="${workout.name}"></td>
         <td th:text="${workout.duration}"></td>
         <td th:text="${workout.intensity}"></td>
-        <td th:text="${workout.date}"></td> <!-- Display the date -->
+        <td th:text="${workout.date}"></td>
+        <td th:text="${workout.category}"></td>
+        <td>
+            <!-- Edit Button -->
+            <div class="action-buttons">
+                <a th:href="@{/edit-workout/{id}(id=${workout.id})}" class="btn btn-primary">Edit</a>
+                <!-- Delete Button -->
+                <a th:href="@{/delete-workout/{id}(id=${workout.id})}" class="btn btn-danger">Delete</a>
+            </div>
+        </td>
     </tr>
     </tbody>
 </table>
 
-<a href="/">Back to Home</a>
+<a href="/" class="back-link">Back to Home</a>
 </body>
 </html>

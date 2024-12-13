@@ -31,8 +31,8 @@ public class WorkoutService {
     }
 
     // Get workout by ID
-    public Workout getWorkoutById(Long id) {
-        return workoutRepository.findById(id).orElse(null); // Return null if not found
+    public Optional<Workout> getWorkoutById(Long id) {
+        return workoutRepository.findById(id);
     }
 
     // Delete workout by ID
@@ -101,6 +101,8 @@ public class WorkoutService {
                             fields[4]  // Category
                     );
                     saveWorkout(workout);
+                } else {
+                    throw new IOException("Invalid CSV format at line: " + line);  // Better error handling
                 }
             }
         }

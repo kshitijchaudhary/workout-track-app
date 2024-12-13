@@ -1,4 +1,5 @@
 package ca.lambton.workout_trackapp.controller;
+import java.util.Optional;
 
 import ca.lambton.workout_trackapp.entity.Workout;
 import ca.lambton.workout_trackapp.service.WorkoutService;
@@ -79,17 +80,15 @@ public class WorkoutController {
 
     @GetMapping("/edit-workout/{id}")
     public String editWorkout(@PathVariable("id") Long id, Model model) {
-        Workout workout = workoutService.getWorkoutById(id);  // Get the workout by id
-        if (workout == null) {
-            return "redirect:/workouts";  // Handle null or non-existent workout
+        Optional<Workout> optionalWorkout = workoutService.getWorkoutById(id); // Get the workout wrapped in Optional
+        if (optionalWorkout.isPresent()) {
+            model.addAttribute("workout", optionalWorkout.get()); // If present, get the Workout object
+            return "editform"; // Return the edit form
+        } else {
+            return "redirect:/workouts"; // If not found, redirect back to workouts list
         }
-
-        // Log the date to ensure it's passed correctly
-        System.out.println("Workout date: " + workout.getDate());
-
-        model.addAttribute("workout", workout);  // Add the workout to the model
-        return "editform";  // Return the name of the view
     }
+
 
     @PostMapping("/update-workout")
     public String updateWorkout(@ModelAttribute Workout workout) {
